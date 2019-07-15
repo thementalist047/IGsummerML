@@ -1,0 +1,10 @@
+The code starts with importing necessary modules and defining the neccesary parameters.
+Loading of cifar100 dataset is done by in-built functions of keras(hastle free solution). the data is dowloaded if not on dataset cache and it
+returns 50,000 train and 10,000 test images in form of numpy arrays reshaped as (number of images , dim1 , dim2 , channels)
+
+Data is first normalized by dividing values by 255 since range 0-255
+
+A sequential model architecture of keras is called .
+There are 2 sets of feture extraction layers with identical parameters
+
+Two Conv2D layers are added with kernel_size = 3 and filters 512 , 256 and "same" padding is used to preseve spatial dimentions (32x32 pixel img)
