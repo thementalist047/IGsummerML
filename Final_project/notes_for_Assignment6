@@ -2,9 +2,26 @@ The code starts with importing necessary modules and defining the neccesary para
 Loading of cifar100 dataset is done by in-built functions of keras(hastle free solution). the data is dowloaded if not on dataset cache and it
 returns 50,000 train and 10,000 test images in form of numpy arrays reshaped as (number of images , dim1 , dim2 , channels)
 
+THer labels are coverted into binary vector forms using to_catagorical function in keras.utils
 Data is first normalized by dividing values by 255 since range 0-255
 
 A sequential model architecture of keras is called .
 There are 2 sets of feture extraction layers with identical parameters
 
-Two Conv2D layers are added with kernel_size = 3 and filters 512 , 256 and "same" padding is used to preseve spatial dimentions (32x32 pixel img)
+Two Conv2D are layers  added with kernel_size = 3 and filters 512 , 256 and same padding is used to preserve spatial dimentions (32x32 pixel img)
+Then a Maxpooling layer is added with a pool size of 2 to reduce the size to 16x16 , decrease nukber of parametrs and extract only useful info.
+Relu activation function is employed then a dropuot layer is added to decrese training time and introduce a sort of normalization
+Another stack of idential layers is added.
+
+Then a dense fuuly connectd  neural network is added . First the parameters' arrays are flattened to 1d and then 2 hidden dense layers are added with
+with ReLu activation function and a Output layers with 100 neurons with softmax activation function to predict probabilities of classes.
+
+The loss function is set to categorical_crossentropy with optimizer adam ( heard its best for beginners )
+
+Any other regulkarization techniques other than dropout is NOT used .
+REASONS :
+1) the model is not trained for experimentation and its not guarenteed theat model will overfit with lower training iterations or if its not
+deep enough for beeter accuracies in resanable training settings.
+2) I did only partially understand layer wise regularisation in keras.
+
+At last model is run by calling model.fit() with the data nad is evaluated over test set for scores .  
